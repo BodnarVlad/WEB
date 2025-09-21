@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна 1 — Основи HTML</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    form {
+      background: var(--card);
+      padding: 16px;
+      border-radius: 8px;
+      max-width: 400px;
+      margin: 0 auto;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    label { display:block; margin-top:12px; }
+    input, select {
+      width:100%;
+      padding:8px;
+      margin-top:4px;
+      border:1px solid #ccc;
+      border-radius:4px;
+    }
+    input[type="submit"] {
+      background: var(--accent);
+      color:#fff;
+      border:none;
+      cursor:pointer;
+      margin-top:16px;
+    }
+    input[type="submit"]:hover {opacity:0.9;}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Лабораторна робота №1</h1>
+      <nav class="main-nav">
+        <!-- Посилання назад до списку лабораторних -->
+        <a href="index.html#labs">← До лабораторних</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Форма реєстрації</h2>
+
+      <!-- замініть URL нижче на власний із webhook.site -->
+      <form action="https://webhook.site/f5b7ee2d-de5c-40be-8a89-b3a4ea7535a9" method="post">
+        <label>Ім’я:
+          <input type="text" name="first_name" required>
+        </label>
+
+        <label>Прізвище:
+          <input type="text" name="last_name" required>
+        </label>
+
+        <label>Email:
+          <input type="email" name="email" required>
+        </label>
+
+        <label>Пароль:
+          <input type="password" name="password" required>
+        </label>
+
+        <label>Підтвердження паролю:
+          <input type="password" name="confirm_password" required>
+        </label>
+
+        <label>Дата народження:
+          <input type="date" name="birth_date">
+        </label>
+
+        <label>Стать:
+          <select name="gender">
+            <option value="">Оберіть</option>
+            <option value="male">Чоловіча</option>
+            <option value="female">Жіноча</option>
+            <option value="other">Інше</option>
+          </select>
+        </label>
+
+        <input type="submit" value="Зареєструватися">
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <p>© 2025 Влад Боднар</p>
+    </div>
+  </footer>
+</body>
+</html>
