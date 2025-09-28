@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Практична робота №2 — Стилізована форма</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+
+    body {
+      background: #e8f5e9;                 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;                   
+    }
+    form.custom-form {
+      background: #ffffff;                 
+      color: #2e7d32;                      
+      width: 420px;
+      padding: 24px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+      position: relative;
+    }
+    form.custom-form::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 60px;
+      height: 60px;
+      background: #2e7d32;                 
+      border-radius: 50%;
+      opacity: 0.2;
+    }
+    h2 {
+      text-align:center;
+      margin-bottom:12px;
+      color:#1b5e20;                       
+    }
+    label { 
+      display:block; 
+      margin-top:14px; 
+      font-weight:600; 
+    }
+    input, select {
+      width:100%;
+      padding:10px;
+      margin-top:6px;
+      border:1px solid #a5d6a7;            
+      border-radius:8px;
+      font-size:15px;
+    }
+    input:focus, select:focus {
+      outline:none;
+      border-color:#66bb6a;                
+      box-shadow:0 0 5px rgba(102,187,106,0.6);
+    }
+    input[type="submit"] {
+      background:#43a047;                  
+      color:#fff;
+      border:none;
+      cursor:pointer;
+      margin-top:20px;
+      transition: background 0.2s;
+    }
+    input[type="submit"]:hover { 
+      background:#2e7d32;                  
+    }
+  </style>
+</head>
+<body>
+  <form class="custom-form" action="https://webhook.site/f5b7ee2d-de5c-40be-8a89-b3a4ea7535a9" method="post">
+    <h2>Реєстрація</h2>
+
+    <label>Ім’я:
+      <input type="text" name="first_name" required>
+    </label>
+
+    <label>Прізвище:
+      <input type="text" name="last_name" required>
+    </label>
+
+    <label>Email:
+      <input type="email" name="email" required>
+    </label>
+
+    <label>Пароль:
+      <input type="password" name="password" required>
+    </label>
+
+    <label>Підтвердження паролю:
+      <input type="password" name="confirm_password" required>
+    </label>
+
+    <label>Дата народження:
+      <input type="date" name="birth_date">
+    </label>
+
+    <label>Стать:
+      <select name="gender">
+        <option value="">Оберіть</option>
+        <option value="male">Чоловіча</option>
+        <option value="female">Жіноча</option>
+      </select>
+    </label>
+
+    <input type="submit" value="Зареєструватися">
+  </form>
+</body>
+</html>
