@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pokemon Scene — Лабораторна №6</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:"Rubik",sans-serif;
+      background:#0a0a1a;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      color:#fff;
+    }
+
+    .wrapper{
+      width:100%;max-width:940px;
+      aspect-ratio:16/9;
+      background:#0b1022;
+      border:2px solid #263251;
+      border-radius:16px;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      box-shadow:0 0 40px #000;
+    }
+
+    .header{
+      padding:10px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background:#141a33;
+      border-bottom:1px solid #263251;
+    }
+    .header-title{
+      font-family:"Press Start 2P";
+      font-size:12px;
+      letter-spacing:1px;
+      text-transform:uppercase;
+    }
+    .header-sub{font-size:10px;color:#9aa3c4;margin-top:3px}
+
+    .btn{
+      padding:6px 14px;
+      border-radius:8px;
+      background:#10172b;
+      border:1px solid #32406a;
+      color:#d5def5;
+      font-size:11px;
+      cursor:pointer;
+    }
+    .btn:hover{background:#17203a}
+
+
+    .scene{
+      position:relative;
+      flex:1;
+      overflow:hidden;
+      background:linear-gradient(to top,#172554,#1e3a8a,#3b82f6);
+    }
+
+    /* Анімація неба: плавний рух градієнта */
+    .scene::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at 50% 150%,rgba(255,255,255,0.35),transparent),
+                 radial-gradient(circle at -10% -10%,#7dd3fc,#1e3a8a);
+      mix-blend-mode:screen;
+      animation:skyMove 14s ease-in-out infinite alternate;
+    }
+    @keyframes skyMove{
+      0%{transform:translateY(0)}
+      100%{transform:translateY(-6%)}
+    }
+
+
+    /* Хмари */
+    .cloud{
+      position:absolute;
+      top:18%;
+      width:120px;height:48px;
+      background:linear-gradient(to bottom,#fff,#cbd5e1);
+      border-radius:60px;
+      filter:blur(1px);
+      opacity:.9;
+      animation:cloudFlow 36s linear infinite;
+    }
+    .cloud::before,.cloud::after{
+      content:"";position:absolute;background:inherit;border-radius:inherit;
+    }
+    .cloud::before{width:65%;height:60%;left:-15%;top:-15%}
+    .cloud::after{width:55%;height:50%;right:-10%;top:-10%}
+
+    .c1{left:-20%;top:20%;animation-delay:0s}
+    .c2{left:40%;top:12%;transform:scale(.85);animation-delay:-10s}
+    .c3{left:70%;top:28%;transform:scale(1.15);animation-delay:-20s}
+
+    @keyframes cloudFlow{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(150%)}
+    }
+
+
+    /* Паралакс гори */
+    .mountains{
+      position:absolute;
+      left:-10%;right:-10%;bottom:30%;height:42%;
+      background:
+        radial-gradient(circle at 20% 130%,#0f172a 0,#000 65%,transparent 70%),
+        radial-gradient(circle at 70% 140%,#1e293b 0,#000 65%,transparent 70%);
+      animation:mountMove 24s linear infinite;
+    }
+    @keyframes mountMove{0%{transform:translateX(0)}100%{transform:translateX(-6%)}}
+
+
+    /* Земля */
+    .ground{
+      position:absolute;inset:auto -10% 0;
+      height:34%;
+      background:
+        linear-gradient(to top,#052e16,#166534 40%,transparent 90%),
+        repeating-linear-gradient(90deg,#052e16 0,#052e16 12px,#166534 12px,#166534 24px);
+      animation:groundMove 10s linear infinite;
+      border-radius:40% 40% 0 0 / 50% 50% 0 0;
+    }
+    @keyframes groundMove{
+      0%{background-position:0 0,0 0}
+      100%{background-position:0 0,-140px 0}
+    }
+
+
+    /* Стежка */
+    .path{
+      position:absolute;left:-20%;right:-20%;bottom:10%;height:12%;
+      background:
+        radial-gradient(circle at 50% -40%,rgba(15,23,42,0.4),transparent 60%),
+        repeating-linear-gradient(90deg,#14532d 0,#14532d 10px,#15803d 10px,#15803d 20px);
+      border-radius:50%;
+      animation:pathScroll 8s linear infinite;
+    }
+    @keyframes pathScroll{
+      0%{background-position:0 0, 0 0}
+      100%{background-position:0 0,-160px 0}
+    }
+
+
+    /* Покемон */
+    .pokemon-box{
+      position:absolute;
+      bottom:18%;left:50%;transform:translateX(-50%);
+      z-index:5;
+      animation:runAcross 11s linear infinite;
+      transform-origin:center bottom;
+    }
+
+    .pokemon{
+      width:96px;height:96px;
+      image-rendering:pixelated;
+      background-image:url("https://img.pokemondb.net/sprites/black-white/anim/normal/charmander.gif");
+      background-position:0 0;
+      background-repeat:no-repeat;
+
+      animation:
+        spriteWalk .55s steps(4) infinite,
+        upDown .55s ease-in-out infinite;
+    }
+
+    @keyframes spriteWalk{
+      0%{background-position:0 0}
+      100%{background-position:-384px 0}
+    }
+    @keyframes upDown{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-6px)}
+    }
+
+    @keyframes runAcross{
+      0%{transform:translate(-140%,0) scale(1)}
+      50%{transform:translate(-50%,0) scale(1.05)}
+      100%{transform:translate(140%,0) scale(1)}
+    }
+
+
+    /* Пауза */
+    .paused *, .paused::before{
+      animation-play-state:paused !important;
+    }
+
+    .info{
+      position:absolute;bottom:14px;left:14px;
+      background:#10172bdd;
+      border:1px solid #32406a;
+      padding:10px 12px;
+      border-radius:10px;
+      font-size:11px;
+      max-width:240px;
+      backdrop-filter:blur(6px);
+    }
+    .info strong{color:#fbbf24}
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="header">
+    <div>
+      <div class="header-title">Pokemon CSS Lab</div>
+      <div class="header-sub">Лабораторна робота №6 — спрайт + фон</div>
+    </div>
+    <button id="toggle" class="btn">Пауза</button>
+  </div>
+
+  <div class="scene" id="scene">
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <div class="cloud c3"></div>
+
+    <div class="mountains"></div>
+    <div class="ground"></div>
+    <div class="path"></div>
+
+    <div class="pokemon-box"><div class="pokemon"></div></div>
+
+    <div class="info">
+      <strong>Спрайт</strong>: рух через <code>steps()</code> та зміну <code>background-position</code><br>
+      Анімація фону: хмари, градієнт неба, паралакс гір.
+    </div>
+  </div>
+</div>
+
+<script>
+  const scene = document.getElementById('scene');
+  const toggle = document.getElementById('toggle');
+  let paused = false;
+
+  toggle.addEventListener('click', ()=>{
+    paused = !paused;
+    scene.classList.toggle('paused', paused);
+    toggle.textContent = paused ? "Старт" : "Пауза";
+  });
+</script>
+
+</body>
+</html>

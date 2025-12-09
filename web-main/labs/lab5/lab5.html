@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio </title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0a0f0a;
+      --panel:#111811;
+      --card:#162016;
+      --accent:#4ade80;
+      --accent-strong:#22c55e;
+      --text:#e5ffe9;
+      --muted:#a5c9b1;
+      --border:rgba(74,222,128,0.3);
+      --radius:20px;
+      --shadow:0 18px 40px rgba(0,0,0,0.45);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Inter", sans-serif;
+      background:linear-gradient(135deg,#0c140c,#0a0f0a 40%,#050805 100%);
+      color:var(--text);
+      padding:20px;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .page{
+      max-width:1180px;
+      margin:0 auto;
+      display:grid;
+      gap:32px;
+    }
+
+    header{
+      background:rgba(17,24,17,0.85);
+      padding:12px 24px;
+      border-radius:999px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      backdrop-filter:blur(12px);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+    }
+
+    .logo{
+      display:flex;align-items:center;gap:14px;
+    }
+    .logo-mark{
+      width:36px;height:36px;border-radius:12px;
+      background:radial-gradient(circle at 35% 0%,#bbf7d0,#4ade80);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-size:18px;color:#0a0f0a;
+    }
+    .logo-text{display:flex;flex-direction:column;font-size:13px}
+    .logo-text strong{font-family:"Montserrat";font-size:16px;color:var(--text)}
+
+    nav{display:flex;gap:18px;font-size:14px}
+    nav a{
+      text-decoration:none;color:var(--muted);
+      transition:0.2s;
+    }
+    nav a:hover{color:var(--text)}
+
+    .btn-primary{
+      background:linear-gradient(135deg,var(--accent),var(--accent-strong));
+      color:#0a0f0a;
+      border:none;
+      border-radius:999px;
+      padding:8px 18px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 14px 24px rgba(34,197,94,0.4);
+      transition:0.2s;
+    }
+    .btn-primary:hover{opacity:0.9}
+
+    /* HERO */
+    .hero{
+      display:grid;grid-template-columns:1.2fr 1fr;gap:28px;
+    }
+
+    .hero-left{
+      background:var(--panel);
+      padding:28px;
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+    }
+
+    .eyebrow{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:5px 12px;font-size:11px;border-radius:999px;
+      background:rgba(34,197,94,0.15);
+      border:1px solid rgba(34,197,94,0.4);
+      color:var(--accent);
+      margin-bottom:12px;
+    }
+    .eyebrow-dot{
+      width:7px;height:7px;border-radius:999px;background:var(--accent-strong);
+    }
+
+    h1{
+      font-family:"Montserrat";
+      font-size:40px;line-height:1.15;margin-bottom:12px;
+    }
+    h1 span{color:var(--accent)}
+
+    .tagline{
+      max-width:34rem;
+      font-size:15px;color:var(--muted);
+      margin-bottom:22px;
+    }
+
+    .hero-actions{display:flex;gap:12px;margin-bottom:20px}
+    .btn-ghost{
+      padding:8px 18px;border-radius:999px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(74,222,128,0.25);
+      color:var(--text);
+      cursor:pointer;
+    }
+
+    .hero-meta{display:flex;gap:22px;font-size:13px;color:var(--muted)}
+    .hero-meta strong{font-size:20px;color:var(--text)}
+
+    /* RIGHT */
+    .hero-right{
+      background:radial-gradient(circle at top,#22c55e 0%,#111811 55%,#0a0f0a 100%);
+      padding:28px;
+      border-radius:var(--radius);
+      border:1px solid rgba(74,222,128,0.4);
+      box-shadow:var(--shadow);
+      position:relative;
+    }
+
+    .profile-card{
+      background:rgba(17,24,17,0.92);
+      padding:16px;
+      border-radius:16px;
+      border:1px solid rgba(74,222,128,0.35);
+      display:flex;gap:14px;align-items:center;
+    }
+    .avatar{
+      width:70px;height:70px;border-radius:18px;
+      background:linear-gradient(135deg,#86efac,#22c55e);
+      display:flex;justify-content:center;align-items:center;
+      font-size:32px;font-weight:700;color:#0a0f0a;
+    }
+
+    .floating-tag{
+      position:absolute;bottom:16px;right:20px;
+      background:rgba(17,24,17,0.85);
+      padding:6px 12px;font-size:11px;border-radius:999px;
+      border:1px solid rgba(74,222,128,0.3);
+      color:var(--muted);
+    }
+
+    /* GRID */
+    .stats{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;
+    }
+    .stat-card{
+      background:var(--card);
+      border-radius:18px;
+      padding:18px;
+      border:1px solid rgba(74,222,128,0.25);
+      box-shadow:var(--shadow);
+      font-size:14px;
+      color:var(--muted);
+    }
+    .stat-card strong{font-size:22px;color:var(--text);display:block;margin-bottom:6px}
+
+    /* PROJECTS */
+    .projects-grid{
+      display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    }
+    .project-card{
+      background:var(--panel);
+      padding:14px;border-radius:18px;
+      border:1px solid rgba(74,222,128,0.25);
+      display:grid;gap:10px;
+    }
+    .project-thumb{
+      height:130px;border-radius:14px;
+      background:linear-gradient(135deg,#22c55e,#4ade80,#86efac);
+    }
+
+    .project-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+    .tag{
+      padding:2px 8px;font-size:11px;border-radius:999px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(74,222,128,0.3);
+    }
+
+    /* CTA */
+    .cta{
+      background:linear-gradient(135deg,#4ade80,#22c55e 45%,#0a0f0a 100%);
+      padding:26px;border-radius:24px;
+      display:grid;grid-template-columns:1.4fr 1fr;gap:20px;
+      border:1px solid rgba(34,197,94,0.4);
+    }
+    .cta input{
+      padding:9px;border-radius:999px;border:1px solid rgba(255,255,255,0.4);
+      background:rgba(255,255,255,0.12);
+      color:white;
+    }
+
+    footer{
+      text-align:center;font-size:12px;color:var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="logo">
+        <div class="logo-mark">V</div>
+        <div class="logo-text">
+          <strong>Vlad</strong>
+          <span>UI/UX Designer</span>
+        </div>
+      </div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="btn-primary">Hire me</button>
+    </header>
+
+    <section class="hero" id="home">
+      <div class="hero-left">
+        <div class="eyebrow"><span class="eyebrow-dot"></span>Open for new projects</div>
+        <h1>Hi, I’m <span>Vlad</span></h1>
+        <p class="tagline">Створюю сучасні інтерфейси, лендінги та мобільні додатки в екостилі та мінімалізмі.</p>
+
+        <div class="hero-actions">
+          <button class="btn-primary">Say hello</button>
+          <button class="btn-ghost">Download CV</button>
+        </div>
+
+        <div class="hero-meta">
+          <div><strong>6+</strong> років досвіду</div>
+          <div><strong>120+</strong> проектів</div>
+          <div><strong>40+</strong> клієнтів</div>
+        </div>
+      </div>
+
+      <aside class="hero-right">
+        <div class="profile-card">
+          <div class="avatar">G</div>

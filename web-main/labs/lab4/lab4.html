@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Планер — Лабораторна 4 (Варіант 2)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
+
+  <style>
+  :root{
+    --bg:#0d0f12;
+    --panel:#1a1d22;
+    --accent:#3b82f6;
+    --text:#e5e7eb;
+    --sub:#9ca3af;
+    --shadow:0 4px 14px rgba(0,0,0,0.6);
+    --radius:14px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  body{
+    font-family:Inter, sans-serif;
+    background:var(--bg);
+    padding:28px;
+    color:var(--text);
+  }
+
+  .wrapper{
+    max-width:1250px;
+    margin:0 auto;
+    display:flex;
+    gap:20px;
+  }
+
+  /* Sidebar */
+  .sidebar{
+    width:260px;
+    background:var(--panel);
+    padding:20px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    height:fit-content;
+  }
+
+  .user{
+    display:flex;
+    gap:12px;
+    margin-bottom:20px;
+    align-items:center;
+  }
+
+  .ava{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:var(--accent);
+    display:flex;
+    color:white;
+    font-weight:700;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+  }
+
+  .menu{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .menu button{
+    padding:10px;
+    border:none;
+    background:#111318;
+    border-radius:8px;
+    cursor:pointer;
+    text-align:left;
+    font-weight:600;
+    color:var(--text);
+  }
+
+  .menu button:hover{
+    background:#1f232b;
+  }
+
+  /* Main */
+  .main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+  }
+
+  /* Top header */
+  .header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .header h1{
+    font-family:Montserrat, sans-serif;
+    font-size:26px;
+    font-weight:800;
+    color:var(--text);
+  }
+
+  .toolbar{
+    display:flex;
+    gap:14px;
+  }
+
+  .toolbar input{
+    padding:8px 12px;
+    border-radius:8px;
+    border:1px solid #2c323b;
+    background:#111318;
+    color:var(--text);
+    min-width:220px;
+  }
+
+  .btn{
+    padding:8px 12px;
+    background:var(--accent);
+    color:white;
+    font-weight:600;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+  }
+
+  .btn:hover{opacity:0.85}
+
+  /* Day cards */
+  .days{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+    gap:20px;
+  }
+
+  .day{
+    background:var(--panel);
+    padding:16px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    border:1px solid #22262d;
+  }
+
+  .day header{
+    font-weight:700;
+    font-size:18px;
+    display:flex;
+    justify-content:space-between;
+    color:var(--text);
+  }
+
+  .task{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    padding:8px;
+    border:1px solid #2c323b;
+    border-radius:8px;
+    background:#111318;
+  }
+
+  .task input[type="checkbox"]{
+    margin-top:2px;
+    width:18px;
+    height:18px;
+    cursor:pointer;
+  }
+
+  .task input[type="text"]{
+    flex:1;
+    border:none;
+    font-weight:600;
+    color:var(--text);
+    background:transparent;
+  }
+
+  .task input[type="text"]:focus{
+    outline:2px solid var(--accent);
+    border-radius:6px;
+  }
+
+  .add-inside{
+    padding:7px 10px;
+    border:1px dashed #3a424c;
+    background:#111318;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+    text-align:left;
+    color:var(--sub);
+  }
+
+  .add-inside:hover{
+    background:#1a1e24;
+  }
+</style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="user">
+        <div class="ava">UA</div>
+        <div>
+          <div style="font-weight:700">Студент</div>
+          <div style="font-size:13px;color:#64748b">Група: ІП-01</div>
+        </div>
+      </div>
+
+      <div class="menu">
+        <button>Головна</button>
+        <button>Тиждень</button>
+        <button>Місяць</button>
+        <button>Налаштування</button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="header">
+        <h1>Планер — Лабораторна №4</h1>
+        <div class="toolbar">
+          <input id="search" placeholder="Пошук...">
+          <button class="btn" id="add-day">+ День</button>
+        </div>
+      </div>
+
+      <section class="days" id="days">
+        <div class="day" data-day="Понеділок">
+          <header>
+            <span>Понеділок</span>
+            <span style="font-size:13px;color:#64748b">3 задачі</span>
+          </header>
+
+          <div class="task">
+            <input type="checkbox">
+            <input type="text" value="Зробити конспект з ОП">
+          </div>
+
+          <div class="task">
+            <input type="checkbox">
+            <input type="text" value="Лабораторна з JS">
+          </div>
+
+          <div class="task">
+            <input type="checkbox">
+            <input type="text" value="Підготовка до семінару">
+          </div>
+
+          <button class="add-inside">+ Додати</button>
+        </div>
+
+        <div class="day" data-day="Вівторок">
+          <header>
+            <span>Вівторок</span>
+            <span style="font-size:13px;color:#64748b">1 задача</span>
+          </header>
+
+          <div class="task">
+            <input type="checkbox">
+            <input type="text" value="Практична з HTML">
+          </div>
+
+          <button class="add-inside">+ Додати</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+<script>
+  const days = document.getElementById('days');
+  const search = document.getElementById('search');
+
+  document.getElementById('add-day').onclick = () => {
+    const name = prompt('Назва дня:','Новий день');
+    if(!name) return;
+
+    const block = document.createElement('div');
+    block.className = 'day';
+    block.setAttribute('data-day', name);
+
+    block.innerHTML = `
+      <header><span>${name}</span><span style="font-size:13px;color:#64748b">0 задач</span></header>
+      <button class="add-inside">+ Додати</button>
+    `;
+
+    days.appendChild(block);
+  };
+
+  days.addEventListener('click', e =>{
+    if(e.target.classList.contains('add-inside')){
+      const title = prompt('Назва задачі:','Нова задача');
+      if(!title) return;
+
+      const task = document.createElement('div');
+      task.className = 'task';
+      task.innerHTML = `<input type="checkbox"><input type="text" value="${title}">`;
+
+      e.target.before(task);
+    }
+  });
+
+  search.oninput = e =>{
+    const q = e.target.value.toLowerCase();
+    document.querySelectorAll('.task input[type="text"]').forEach(inp =>{
+      inp.parentElement.style.display = inp.value.toLowerCase().includes(q) ? 'flex' : 'none';
+    });
+  };
+</script>
+
+</body>
+</html>
